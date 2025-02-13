@@ -22,9 +22,9 @@ def pop_restricted_items(items):
 
 for key, value in menu_dict.items():
     #print(key)
-    formatted_dict[str(key.date())] = {}
-    for x in range(len(value)):
-        item = str(value[x])
+    formatted_dict[str(key.date())] = {}    #initializes the dict with a key for a specific day
+    for x in range(len(value)):             #logic finds the index of the required fields such as
+        item = str(value[x])                #breakfast, lunch, dinner
         if "LUNCH" in item:
             lunch_index = x
         elif "BREAKFAST" in item:
@@ -33,15 +33,16 @@ for key, value in menu_dict.items():
             dinner_index = x
     
 
-    breakfast = value[breakfast_index + 1: lunch_index]
-    lunch = value[lunch_index + 1: dinner_index]
+    breakfast = value[breakfast_index + 1: lunch_index]     #lists are made of all the items in a 
+    lunch = value[lunch_index + 1: dinner_index]            #specific meal
     dinner = value[dinner_index:]
     
-    breakfast = pop_restricted_items(breakfast)
-    lunch = pop_restricted_items(lunch)
+    breakfast = pop_restricted_items(breakfast)             #empty items and wierd '******' are removed from 
+    lunch = pop_restricted_items(lunch)                     #the python lists
     dinner = pop_restricted_items(dinner)
     
-    formatted_dict[str(key.date())]["BREAKFAST"] = breakfast
+
+    formatted_dict[str(key.date())]["BREAKFAST"] = breakfast  
     formatted_dict[str(key.date())]["LUNCH"] = lunch
     formatted_dict[str(key.date())]["DINNER"] = dinner
     
