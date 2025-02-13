@@ -3,10 +3,7 @@ import json
 
 menu = pd.read_excel('task_1/MessMenuSample.xlsx', skiprows=[0, 12, 22])  #skipping row 0 as not required in final json
 
-#print(menu)
-
 formatted_dict = {}
-
 menu_dict = menu.to_dict(orient="list")    #orient = list because it makes managing data easier
 
 def pop_restricted_items(items):
@@ -21,7 +18,6 @@ def pop_restricted_items(items):
 
 
 for key, value in menu_dict.items():
-    #print(key)
     formatted_dict[str(key.date())] = {}    #initializes the dict with a key for a specific day
     for x in range(len(value)):             #logic finds the index of the required fields such as
         item = str(value[x])                #breakfast, lunch, dinner
