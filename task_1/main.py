@@ -22,7 +22,7 @@ def pop_restricted_items(items):
 
 for key, value in menu_dict.items():
     #print(key)
-    
+    formatted_dict[str(key.date())] = {}
     for x in range(len(value)):
         item = str(value[x])
         if "LUNCH" in item:
@@ -32,15 +32,18 @@ for key, value in menu_dict.items():
         elif "DINNER" in item:
             dinner_index = x
     
-    breakfast = {"BREAKFAST": value[breakfast_index + 1: lunch_index]}
-    lunch = {"LUNCH": value[lunch_index + 1: dinner_index]}
-    dinner = {"DINNER": value[dinner_index:]}
+
+    breakfast = value[breakfast_index + 1: lunch_index]
+    lunch = value[lunch_index + 1: dinner_index]
+    dinner = value[dinner_index:]
     
-    breakfast["BREAKFAST"] = pop_restricted_items(breakfast["BREAKFAST"])
-    lunch["LUNCH"] = pop_restricted_items(lunch["LUNCH"])
-    dinner["DINNER"] = pop_restricted_items(dinner["DINNER"])
+    breakfast = pop_restricted_items(breakfast)
+    lunch = pop_restricted_items(lunch)
+    dinner = pop_restricted_items(dinner)
     
-    formatted_dict[str(key.date())] = breakfast, lunch, dinner
+    formatted_dict[str(key.date())]["BREAKFAST"] = breakfast
+    formatted_dict[str(key.date())]["LUNCH"] = lunch
+    formatted_dict[str(key.date())]["DINNER"] = dinner
     
 
 with open("task_1/menu.json", "w") as outfile: 
